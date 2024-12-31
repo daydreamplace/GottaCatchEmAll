@@ -6,15 +6,23 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		F2889BE72D240CF1008CAD5C /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = F2889BE62D240CF1008CAD5C /* Moya */; };
+		F2889BE92D240CF1008CAD5C /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = F2889BE82D240CF1008CAD5C /* RxMoya */; };
+		F2889BEC2D240D06008CAD5C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F2889BEB2D240D06008CAD5C /* SnapKit */; };
+		F2889C242D241CE2008CAD5C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F2889C232D241CE2008CAD5C /* .gitignore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		F2889BB92D240249008CAD5C /* GottaCatch'EmAll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GottaCatch'EmAll.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2889C232D241CE2008CAD5C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
 		F2889BCB2D24024B008CAD5C /* Exceptions for "GottaCatch'EmAll" folder in "GottaCatch'EmAll" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resource/Info.plist,
 			);
 			target = F2889BB82D240249008CAD5C /* GottaCatch'EmAll */;
 		};
@@ -36,6 +44,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2889BEC2D240D06008CAD5C /* SnapKit in Frameworks */,
+				F2889BE92D240CF1008CAD5C /* RxMoya in Frameworks */,
+				F2889BE72D240CF1008CAD5C /* Moya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,6 +56,7 @@
 		F2889BB02D240249008CAD5C = {
 			isa = PBXGroup;
 			children = (
+				F2889C232D241CE2008CAD5C /* .gitignore */,
 				F2889BBB2D240249008CAD5C /* GottaCatch'EmAll */,
 				F2889BBA2D240249008CAD5C /* Products */,
 			);
@@ -78,6 +90,9 @@
 			);
 			name = "GottaCatch'EmAll";
 			packageProductDependencies = (
+				F2889BE62D240CF1008CAD5C /* Moya */,
+				F2889BE82D240CF1008CAD5C /* RxMoya */,
+				F2889BEB2D240D06008CAD5C /* SnapKit */,
 			);
 			productName = "GottaCatch'EmAll";
 			productReference = F2889BB92D240249008CAD5C /* GottaCatch'EmAll.app */;
@@ -107,6 +122,10 @@
 			);
 			mainGroup = F2889BB02D240249008CAD5C;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				F2889BE52D240CF1008CAD5C /* XCRemoteSwiftPackageReference "Moya" */,
+				F2889BEA2D240D06008CAD5C /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F2889BBA2D240249008CAD5C /* Products */;
 			projectDirPath = "";
@@ -122,6 +141,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2889C242D241CE2008CAD5C /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,10 +166,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "GottaCatch'EmAll/Info.plist";
+				INFOPLIST_FILE = "GottaCatch'EmAll/Resource/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -173,10 +192,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "GottaCatch'EmAll/Info.plist";
+				INFOPLIST_FILE = "GottaCatch'EmAll/Resource/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -333,6 +351,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F2889BE52D240CF1008CAD5C /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
+		F2889BEA2D240D06008CAD5C /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F2889BE62D240CF1008CAD5C /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F2889BE52D240CF1008CAD5C /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+		F2889BE82D240CF1008CAD5C /* RxMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F2889BE52D240CF1008CAD5C /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = RxMoya;
+		};
+		F2889BEB2D240D06008CAD5C /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F2889BEA2D240D06008CAD5C /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F2889BB12D240249008CAD5C /* Project object */;
 }
