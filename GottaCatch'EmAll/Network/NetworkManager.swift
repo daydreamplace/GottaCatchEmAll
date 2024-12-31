@@ -6,3 +6,11 @@
 //
 
 import Foundation
+import Moya
+
+final class NetworkManager {
+    static let shared = NetworkManager()
+    private init() {}
+    
+    private let provider = MoyaProvider<PokemonAPI>()
+}
