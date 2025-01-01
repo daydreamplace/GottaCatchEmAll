@@ -20,7 +20,7 @@ extension PokemonAPI: TargetType {
     var path: String {
         switch self {
         case .fetchPokemonList(let limit, let offset):
-            return "/pokemon?limit=\(limit)&offset=\(offset)"
+            return "/pokemon"
         }
     }
     
@@ -29,8 +29,11 @@ extension PokemonAPI: TargetType {
     }
     
     var task: Task {
-        return .requestPlain
-    }
+           switch self {
+           case .fetchPokemonList(let limit, let offset):
+               return .requestParameters(parameters: ["limit": limit, "offset": offset], encoding: URLEncoding.queryString)
+           }
+       }
     
     var headers: [String: String]? {
         return ["Content-Type": "application/json"]
