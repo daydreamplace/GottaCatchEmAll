@@ -20,16 +20,15 @@ final class MainViewController: UIViewController {
     private lazy var pokemonCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 10
-        layout.minimumInteritemSpacing = 10
-        layout.itemSize = CGSize(width: (view.frame.width - 40) / 3, height: (view.frame.width - 40) / 3)
-        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .clear
-        collectionView.register(PokemonCollectionViewCell.self, forCellWithReuseIdentifier: "PokemonCell")
+        collectionView.register(PokemonCell.self, forCellWithReuseIdentifier: "PokemonCell")
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.backgroundColor = UIColor.darkRed
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,9 +47,47 @@ final class MainViewController: UIViewController {
         
         pokemonCollectionView.snp.makeConstraints { make in
             make.top.equalTo(pokemonBallImageView.snp.top).offset(120)
-            make.left.right.equalToSuperview().inset(10)
+            make.left.right.equalToSuperview().inset(0)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
         
+    }
+}
+
+// MARK: - UICollectionViewDelegate, UICollectionViewDataSource
+extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 20
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PokemonCell", for: indexPath) as? PokemonCell else {
+            return UICollectionViewCell()
+        }
+        cell.backgroundColor = .cellBackground
+        return cell
+    }
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+extension MainViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let itemsPerRow: CGFloat = 3
+        let spacing: CGFloat = 10
+        let totalSpacing = (itemsPerRow - 1) * spacing
+        let width = (collectionView.frame.width - totalSpacing - 20) / itemsPerRow
+        return CGSize(width: floor(width), height: floor(width))
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
 }
