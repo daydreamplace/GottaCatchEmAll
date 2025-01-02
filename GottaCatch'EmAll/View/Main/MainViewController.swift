@@ -6,28 +6,31 @@
 //
 
 import UIKit
+import SnapKit
 import RxSwift
 
 final class MainViewController: UIViewController {
-    private let disposeBag = DisposeBag()
+    private let pokemonBallImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "pokemonBall"))
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let endpoint = PokemonAPI.fetchPokemonList(limit: 10, offset: 0)
-        
-        NetworkManager.shared.fetch(endpoint: endpoint, type: Data.self)
-            .subscribe { result in
-                switch result {
-                case .success(let data):
-                    if let jsonString = String(data: data, encoding: .utf8) {
-                        print("Test \(jsonString)")
-                    }
-                case .failure(let error):
-                    print("Error \(error.localizedDescription)")
-                }
-            }
-            .disposed(by: disposeBag)
+        view.backgroundColor = .mainRed
+        setupViews()
     }
     
+    func setupViews() {
+        view.addSubviews(pokemonBallImageView)
+        
+        pokemonBallImageView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+            make.centerX.equalToSuperview()
+            make.height.width.equalTo(100)
+        }
+        
+    }
 }
-

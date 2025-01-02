@@ -15,12 +15,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F2889BB92D240249008CAD5C /* GottaCatch'EmAll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GottaCatch'EmAll.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2889BB92D240249008CAD5C /* GottaCatch'EmAll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "GottaCatch'EmAll.app"; path = "/Users/eden/Desktop/iOS/GottaCatch'EmAll/build/Debug-iphoneos/GottaCatch'EmAll.app"; sourceTree = "<absolute>"; };
 		F2889C232D241CE2008CAD5C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		F2889BCB2D24024B008CAD5C /* Exceptions for "GottaCatch'EmAll" folder in "GottaCatch'EmAll" target */ = {
+		F2B7BD412D2638D5001DE837 /* Exceptions for "GottaCatch'EmAll" folder in "GottaCatch'EmAll" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Resource/Info.plist,
@@ -30,10 +30,10 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		F2889BBB2D240249008CAD5C /* GottaCatch'EmAll */ = {
+		F2B7BD332D2638D5001DE837 /* GottaCatch'EmAll */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				F2889BCB2D24024B008CAD5C /* Exceptions for "GottaCatch'EmAll" folder in "GottaCatch'EmAll" target */,
+				F2B7BD412D2638D5001DE837 /* Exceptions for "GottaCatch'EmAll" folder in "GottaCatch'EmAll" target */,
 			);
 			path = "GottaCatch'EmAll";
 			sourceTree = "<group>";
@@ -59,17 +59,8 @@
 			isa = PBXGroup;
 			children = (
 				F2889C232D241CE2008CAD5C /* .gitignore */,
-				F2889BBB2D240249008CAD5C /* GottaCatch'EmAll */,
-				F2889BBA2D240249008CAD5C /* Products */,
+				F2B7BD332D2638D5001DE837 /* GottaCatch'EmAll */,
 			);
-			sourceTree = "<group>";
-		};
-		F2889BBA2D240249008CAD5C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				F2889BB92D240249008CAD5C /* GottaCatch'EmAll.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -88,7 +79,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				F2889BBB2D240249008CAD5C /* GottaCatch'EmAll */,
+				F2B7BD332D2638D5001DE837 /* GottaCatch'EmAll */,
 			);
 			name = "GottaCatch'EmAll";
 			packageProductDependencies = (
@@ -131,7 +122,7 @@
 				F2B7BC5E2D262ACD001DE837 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			preferredProjectObjectVersion = 77;
-			productRefGroup = F2889BBA2D240249008CAD5C /* Products */;
+			productRefGroup = F2889BB02D240249008CAD5C;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
