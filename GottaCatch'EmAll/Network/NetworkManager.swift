@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 import Moya
 import RxSwift
 
@@ -19,7 +20,7 @@ final class NetworkManager {
     func fetch<T: Decodable>(endpoint: PokemonAPI, type: T.Type) -> Single<T> {
         return Single.create { [weak self] single in
             guard let self = self else {
-                single(.failure(NSError(domain: "NetworkManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "Self is nil."])))
+                single(.failure(NSError(domain: "NetworkManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "cannot find network manager instance"])))
                 return Disposables.create()
             }
             
@@ -45,6 +46,36 @@ final class NetworkManager {
                 }
             }
             return Disposables.create()
+        }
+    }
+    
+    func fetchImage(for id: Int) -> Single<UIImage> {
+        return Single.create{ single in
+            let urlString = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(id).png"
+            guard let url = URL(string: urlString) else {
+                let error = NSError(domain: "NetworkManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "invalid url"])
+                single(.failure(error))
+                return Disposables.create()
+            }
+            
+            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                if let error = error {
+                    single(.failure(error))
+                    return
+                }
+                guard let data = data, let image = UIImage(data: data) else {
+                    let error = NSError(domain: "NetworkManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "failed to load image"])
+                    single(.failure(error))
+                    return
+                }
+                
+                single(.success(image))
+            }
+            task.resume()
+            
+            return Disposables.create{
+                task.cancel()
+            }
         }
     }
 }
