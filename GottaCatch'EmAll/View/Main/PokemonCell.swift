@@ -7,9 +7,20 @@
 
 import UIKit
 import SnapKit
+import RxSwift
 
 final class PokemonCell: UICollectionViewCell {
     static let id = "PokemonCell"
+    
+    private let pokemonImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 8
+        return imageView
+    }()
+    
+    private let disposeBag = DisposeBag()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,8 +32,22 @@ final class PokemonCell: UICollectionViewCell {
     }
     
     private func setupUI() {
-        contentView.backgroundColor = .cellBackground
-        contentView.layer.cornerRadius = 8
-        contentView.clipsToBounds = true
+        contentView.addSubview(pokemonImageView)
+        
+        pokemonImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(8)
+        }
+    }
+    
+    func configure(id: Int) {
+        let networkManager = NetworkManager.shared
+        networkManager.fetchImage(for: id)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] image in
+                self?.pokemonImageView.image = image
+            }, onFailure: { error in
+                print(" \(id): \(error.localizedDescription)")
+            })
+            .disposed(by: disposeBag)
     }
 }

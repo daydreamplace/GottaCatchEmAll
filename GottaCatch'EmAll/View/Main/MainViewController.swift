@@ -64,7 +64,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PokemonCell", for: indexPath) as? PokemonCell else {
             return UICollectionViewCell()
         }
-        cell.backgroundColor = .cellBackground
+        cell.configure(id: indexPath.row + 1)
         return cell
     }
 }
