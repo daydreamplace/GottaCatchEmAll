@@ -67,6 +67,11 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.configure(id: indexPath.row + 1)
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailVC = DetailViewController()
+            navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
