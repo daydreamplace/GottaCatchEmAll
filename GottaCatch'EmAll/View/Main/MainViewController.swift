@@ -24,7 +24,7 @@ final class MainViewController: UIViewController {
         collectionView.register(PokemonCell.self, forCellWithReuseIdentifier: "PokemonCell")
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = UIColor.darkRed
+        collectionView.backgroundColor = .darkRed
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
