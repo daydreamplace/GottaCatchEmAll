@@ -121,7 +121,19 @@ final class DetailViewController: UIViewController {
     }
     
     private func bindViewModel() {
+        viewModel.pokemonImage
+            .observe(on: MainScheduler.instance)
+            .bind(to: pokemonImageView.rx.image)
+            .disposed(by: disposeBag)
+        
+        viewModel.pokemonID
+            .map { "No.\($0)" }
+            .observe(on: MainScheduler.instance)
+            .bind(to: idLabel.rx.text)
+            .disposed(by: disposeBag)
+        
         viewModel.pokemonName
+            .map { " \($0)" }
             .observe(on: MainScheduler.instance)
             .bind(to: nameLabel.rx.text)
             .disposed(by: disposeBag)
@@ -142,11 +154,6 @@ final class DetailViewController: UIViewController {
             .map { "몸무게: \($0)" }
             .observe(on: MainScheduler.instance)
             .bind(to: weightLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        viewModel.pokemonImage
-            .observe(on: MainScheduler.instance)
-            .bind(to: pokemonImageView.rx.image)
             .disposed(by: disposeBag)
     }
 }

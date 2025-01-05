@@ -14,6 +14,8 @@ final class DetailViewModel {
     private let networkManager = NetworkManager.shared
     private let disposeBag = DisposeBag()
     
+    let pokemonID = BehaviorSubject<Int>(value: 0)
+    
     let pokemonName = PublishSubject<String>()
     let pokemonType = PublishSubject<String>()
     let pokemonHeight = PublishSubject<String>()
@@ -22,6 +24,7 @@ final class DetailViewModel {
     let error = PublishSubject<String>()
     
     init(pokemonID: Int) {
+        self.pokemonID.onNext(pokemonID)
         fetchPokemonDetail(id: pokemonID)
         fetchPokemonImage(id: pokemonID)
     }
