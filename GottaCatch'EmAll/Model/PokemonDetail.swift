@@ -12,5 +12,13 @@ struct PokemonDetail: Decodable {
     let name: String
     let weight: Double
     let height: Double
-    let types: [String]
+    let types: [PokemonType]
+    
+    struct PokemonType: Decodable {
+        let type: TypeInfo
+        
+        struct TypeInfo: Decodable {
+            let name: String
+        }
+    }
 }

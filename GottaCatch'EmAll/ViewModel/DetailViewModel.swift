@@ -35,7 +35,8 @@ final class DetailViewModel {
             .subscribe(onNext: { [weak self] detail in
                 print("Fetched Pokemon Detail: \(detail)")
                 self?.pokemonName.onNext(detail.name)
-                self?.pokemonType.onNext(detail.types.joined(separator: ", "))
+                let types = detail.types.compactMap { $0.type.name }.joined(separator: ", ")
+                self?.pokemonType.onNext(types)
                 self?.pokemonHeight.onNext("\(detail.height)m")
                 self?.pokemonWeight.onNext("\(detail.weight)kg")
             }, onError: { [weak self] error in
@@ -43,8 +44,9 @@ final class DetailViewModel {
             })
             .disposed(by: disposeBag)
     }
-
+    
     func fetchPokemonDetail(id: Int) -> Single<PokemonDetail> {
+        print("아이디 잘 받아오나요 \(id)")
         return networkManager.fetch(endpoint: PokemonAPI.fetchPokemonDetail(id: id), type: PokemonDetail.self)
     }
 }
