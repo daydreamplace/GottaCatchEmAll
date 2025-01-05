@@ -10,6 +10,7 @@ import SnapKit
 import RxSwift
 
 final class MainViewController: UIViewController {
+    
     private let pokemonBallImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "pokemonBall"))
         imageView.contentMode = .scaleAspectFit
@@ -24,7 +25,7 @@ final class MainViewController: UIViewController {
         collectionView.register(PokemonCell.self, forCellWithReuseIdentifier: "PokemonCell")
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = UIColor.darkRed
+        collectionView.backgroundColor = .darkRed
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -69,8 +70,9 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailVC = DetailViewController()
-            navigationController?.pushViewController(detailVC, animated: true)
+        let selectedID = indexPath.row + 1
+        let detailViewController = DetailViewController(pokemonID: selectedID)
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
 

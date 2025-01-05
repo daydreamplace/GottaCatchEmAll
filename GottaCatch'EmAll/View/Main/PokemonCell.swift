@@ -10,6 +10,7 @@ import SnapKit
 import RxSwift
 
 final class PokemonCell: UICollectionViewCell {
+    
     static let id = "PokemonCell"
     
     private let pokemonImageView: UIImageView = {
@@ -32,7 +33,7 @@ final class PokemonCell: UICollectionViewCell {
     
     private func setupUI() {
         contentView.addSubview(pokemonImageView)
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = .cellBackground
         contentView.layer.cornerRadius = 8
         
         pokemonImageView.snp.makeConstraints { make in
