@@ -20,8 +20,6 @@ final class PokemonCell: UICollectionViewCell {
         return imageView
     }()
     
-    private let disposeBag = DisposeBag()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -42,14 +40,5 @@ final class PokemonCell: UICollectionViewCell {
     }
     
     func configure(id: Int) {
-        let networkManager = NetworkManager.shared
-        networkManager.fetchImage(for: id)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onSuccess: { [weak self] image in
-                self?.pokemonImageView.image = image
-            }, onFailure: { error in
-                print(" \(id): \(error.localizedDescription)")
-            })
-            .disposed(by: disposeBag)
     }
 }
