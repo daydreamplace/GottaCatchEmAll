@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 import RxSwift
 
 final class DetailViewController: UIViewController {
@@ -15,7 +16,8 @@ final class DetailViewController: UIViewController {
     
     private let pokemonView: UIView = {
         let view = UIView()
-        
+        view.backgroundColor = .darkRed
+        view.layer.cornerRadius = 10
         return view
     }()
     
@@ -62,5 +64,16 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .mainRed
+        configureUI()
+    }
+    
+    private func configureUI() {
+        view.addSubview(pokemonView)
+        
+        pokemonView.snp.makeConstraints{ make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(16)
+            make.leading.trailing.equalToSuperview().inset(32)
+            make.height.equalTo(400)
+        }
     }
 }
