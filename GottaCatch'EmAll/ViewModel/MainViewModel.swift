@@ -9,6 +9,7 @@ import RxSwift
 import RxCocoa
 
 class MainViewModel {
+    
     private let networkManager = NetworkManager.shared
     private let disposeBag = DisposeBag()
     

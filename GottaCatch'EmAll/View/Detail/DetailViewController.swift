@@ -14,18 +14,14 @@ final class DetailViewController: UIViewController {
     private let viewModel = DetailViewModel()
     private let disposeBag = DisposeBag()
     
-    private let pokemonView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .darkRed
-        view.layer.cornerRadius = 10
-        return view
-    }()
-    
     private let pokemonStackView: UIStackView = {
         let stackView = UIStackView()
+        stackView.backgroundColor = .darkRed
+        stackView.layer.cornerRadius = 10
         stackView.axis = .vertical
         stackView.spacing = 16
         stackView.alignment = .center
+        
         return stackView
     }()
     
@@ -54,7 +50,7 @@ final class DetailViewController: UIViewController {
     
     private let idLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 30)
+        label.font = UIFont.boldSystemFont(ofSize: 24)
         label.textAlignment = .center
         label.textColor = .white
         label.text = "54"
@@ -63,7 +59,7 @@ final class DetailViewController: UIViewController {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 30)
+        label.font = UIFont.boldSystemFont(ofSize: 24)
         label.textAlignment = .center
         label.textColor = .white
         label.text = "고라파덕"
@@ -105,26 +101,17 @@ final class DetailViewController: UIViewController {
     private func configureUI() {
         view.backgroundColor = .mainRed
         
-        view.addSubview(pokemonView)
-        pokemonView.addSubview(pokemonStackView)
+        view.addSubview(pokemonStackView)
         
         pokemonStackView.addArrangedSubviews(pokemonImageView, nameStackView, infoStackView)
         
         nameStackView.addArrangedSubviews(idLabel, nameLabel)
         infoStackView.addArrangedSubviews(typeLabel, heightLabel, weightLabel)
         
-        setupConstraints()
-    }
-    
-    private func setupConstraints() {
-        pokemonView.snp.makeConstraints{ make in
+        pokemonStackView.snp.makeConstraints{ make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(16)
             make.leading.trailing.equalToSuperview().inset(32)
             make.height.equalTo(400)
-        }
-        
-        pokemonStackView.snp.makeConstraints{ make in
-            make.edges.equalToSuperview().inset(16)
         }
     }
 }

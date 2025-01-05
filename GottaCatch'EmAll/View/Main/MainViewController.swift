@@ -10,6 +10,7 @@ import SnapKit
 import RxSwift
 
 final class MainViewController: UIViewController {
+    
     private let pokemonBallImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "pokemonBall"))
         imageView.contentMode = .scaleAspectFit
