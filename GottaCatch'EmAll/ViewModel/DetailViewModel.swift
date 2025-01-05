@@ -5,6 +5,7 @@
 //  Created by Eden on 1/4/25.
 //
 
+import UIKit
 import RxSwift
 import RxCocoa
 
@@ -13,40 +14,39 @@ final class DetailViewModel {
     private let networkManager = NetworkManager.shared
     private let disposeBag = DisposeBag()
     
-    let pokemonID = BehaviorSubject<Int?>(value: nil)
-    
     let pokemonName = PublishSubject<String>()
     let pokemonType = PublishSubject<String>()
     let pokemonHeight = PublishSubject<String>()
     let pokemonWeight = PublishSubject<String>()
+    let pokemonImage = PublishSubject<UIImage?>()
     let error = PublishSubject<String>()
     
-    init() {
-        bindPokemonID()
+    init(pokemonID: Int) {
+        fetchPokemonDetail(id: pokemonID)
+        fetchPokemonImage(id: pokemonID)
     }
     
-    private func bindPokemonID() {
-        pokemonID
-            .compactMap { $0 }
-            .flatMapLatest { [weak self] id -> Observable<PokemonDetail> in
-                guard let self = self else { return Observable.empty() }
-                return self.fetchPokemonDetail(id: id).asObservable()
-            }
-            .subscribe(onNext: { [weak self] detail in
-                print("Fetched Pokemon Detail: \(detail)")
+    private func fetchPokemonDetail(id: Int) {
+        networkManager.fetch(endpoint: PokemonAPI.fetchPokemonDetail(id: id), type: PokemonDetail.self)
+            .subscribe(onSuccess: { [weak self] detail in
                 self?.pokemonName.onNext(detail.name)
                 let types = detail.types.compactMap { $0.type.name }.joined(separator: ", ")
                 self?.pokemonType.onNext(types)
                 self?.pokemonHeight.onNext("\(detail.height)m")
                 self?.pokemonWeight.onNext("\(detail.weight)kg")
-            }, onError: { [weak self] error in
+            }, onFailure: { [weak self] error in
                 self?.error.onNext("포켓몬 데이터를 가져오는 데 실패했습니다: \(error.localizedDescription)")
             })
             .disposed(by: disposeBag)
     }
     
-    func fetchPokemonDetail(id: Int) -> Single<PokemonDetail> {
-        print("아이디 잘 받아오나요 \(id)")
-        return networkManager.fetch(endpoint: PokemonAPI.fetchPokemonDetail(id: id), type: PokemonDetail.self)
+    private func fetchPokemonImage(id: Int) {
+        networkManager.fetchImage(for: id)
+            .subscribe(onSuccess: { [weak self] image in
+                self?.pokemonImage.onNext(image)
+            }, onFailure: { [weak self] error in
+                self?.error.onNext("이미지를 가져오는 데 실패했습니다: \(error.localizedDescription)")
+            })
+            .disposed(by: disposeBag)
     }
 }

@@ -70,11 +70,9 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailVC = DetailViewController()
         let selectedID = indexPath.row + 1
-        print(selectedID)
-        detailVC.pokemonID = selectedID
-        navigationController?.pushViewController(detailVC, animated: true)
+        let detailViewController = DetailViewController(pokemonID: selectedID)
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
 

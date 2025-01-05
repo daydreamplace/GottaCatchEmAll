@@ -11,16 +11,8 @@ import RxSwift
 
 final class DetailViewController: UIViewController {
     
-    private let viewModel = DetailViewModel()
+    private let viewModel: DetailViewModel
     private let disposeBag = DisposeBag()
-    
-    var pokemonID: Int? {
-        didSet {
-            if let id = pokemonID {
-                viewModel.pokemonID.onNext(id)
-            }
-        }
-    }
     
     private let pokemonStackView: UIStackView = {
         let stackView = UIStackView()
@@ -62,7 +54,6 @@ final class DetailViewController: UIViewController {
         label.font = UIFont.boldSystemFont(ofSize: 24)
         label.textAlignment = .center
         label.textColor = .white
-        
         return label
     }()
     
@@ -71,7 +62,6 @@ final class DetailViewController: UIViewController {
         label.font = UIFont.boldSystemFont(ofSize: 24)
         label.textAlignment = .center
         label.textColor = .white
-        
         return label
     }()
     
@@ -80,7 +70,6 @@ final class DetailViewController: UIViewController {
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = .center
         label.textColor = .white
-        
         return label
     }()
     
@@ -89,7 +78,6 @@ final class DetailViewController: UIViewController {
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = .center
         label.textColor = .white
-        
         return label
     }()
     
@@ -98,14 +86,22 @@ final class DetailViewController: UIViewController {
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = .center
         label.textColor = .white
-        
         return label
     }()
+    
+    init(pokemonID: Int) {
+        self.viewModel = DetailViewModel(pokemonID: pokemonID)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        bind()
+        bindViewModel()
     }
     
     private func configureUI() {
@@ -124,10 +120,7 @@ final class DetailViewController: UIViewController {
         }
     }
     
-    private func bind () {
-        guard let pokemonID = pokemonID else { return }
-        viewModel.pokemonID.onNext(pokemonID)
-        
+    private func bindViewModel() {
         viewModel.pokemonName
             .observe(on: MainScheduler.instance)
             .bind(to: nameLabel.rx.text)
@@ -149,6 +142,11 @@ final class DetailViewController: UIViewController {
             .map { "몸무게: \($0)" }
             .observe(on: MainScheduler.instance)
             .bind(to: weightLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.pokemonImage
+            .observe(on: MainScheduler.instance)
+            .bind(to: pokemonImageView.rx.image)
             .disposed(by: disposeBag)
     }
 }
