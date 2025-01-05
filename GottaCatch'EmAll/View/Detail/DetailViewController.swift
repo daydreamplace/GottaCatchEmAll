@@ -29,7 +29,8 @@ final class DetailViewController: UIViewController {
         stackView.axis = .vertical
         stackView.spacing = 16
         stackView.alignment = .center
-        
+        stackView.layoutMargins = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
     }()
     
@@ -109,7 +110,6 @@ final class DetailViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = .mainRed
-        
         view.addSubview(pokemonStackView)
         
         pokemonStackView.addArrangedSubviews(pokemonImageView, nameStackView, infoStackView)

@@ -16,7 +16,6 @@ final class NetworkManager {
     
     private let provider = MoyaProvider<PokemonAPI>()
     
-    
     func fetch<T: Decodable>(endpoint: PokemonAPI, type: T.Type) -> Single<T> {
         return Single.create { [weak self] single in
             guard let self = self else {

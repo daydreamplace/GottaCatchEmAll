@@ -10,6 +10,7 @@ import SnapKit
 import RxSwift
 
 final class PokemonCell: UICollectionViewCell {
+    
     static let id = "PokemonCell"
     
     private let pokemonImageView: UIImageView = {
