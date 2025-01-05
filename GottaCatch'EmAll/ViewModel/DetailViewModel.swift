@@ -15,13 +15,12 @@ final class DetailViewModel {
     private let disposeBag = DisposeBag()
     
     let pokemonID = BehaviorSubject<Int>(value: 0)
-    
-    let pokemonName = PublishSubject<String>()
-    let pokemonType = PublishSubject<String>()
-    let pokemonHeight = PublishSubject<String>()
-    let pokemonWeight = PublishSubject<String>()
-    let pokemonImage = PublishSubject<UIImage?>()
-    let error = PublishSubject<String>()
+    let pokemonName = BehaviorSubject<String>(value: "")
+    let pokemonType = BehaviorSubject<String>(value: "")
+    let pokemonHeight = BehaviorSubject<String>(value: "")
+    let pokemonWeight = BehaviorSubject<String>(value: "")
+    let pokemonImage = BehaviorSubject<UIImage?>(value: nil)
+    let error = BehaviorSubject<String>(value: "")
     
     init(pokemonID: Int) {
         self.pokemonID.onNext(pokemonID)
