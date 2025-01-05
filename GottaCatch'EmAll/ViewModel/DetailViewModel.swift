@@ -29,9 +29,13 @@ final class DetailViewModel {
     private func fetchPokemonDetail(id: Int) {
         networkManager.fetch(endpoint: PokemonAPI.fetchPokemonDetail(id: id), type: PokemonDetail.self)
             .subscribe(onSuccess: { [weak self] detail in
-                self?.pokemonName.onNext(detail.name)
-                let types = detail.types.compactMap { $0.type.name }.joined(separator: ", ")
-                self?.pokemonType.onNext(types)
+                let translatedName = PokemonTranslator.getKoreanName(for: detail.name)
+                let translatedTypes = detail.types.compactMap {
+                    PokemonTypeName(rawValue: $0.type.name)?.displayName
+                }.joined(separator: ", ")
+                
+                self?.pokemonName.onNext(translatedName)
+                self?.pokemonType.onNext(translatedTypes)
                 self?.pokemonHeight.onNext("\(detail.height)m")
                 self?.pokemonWeight.onNext("\(detail.weight)kg")
             }, onFailure: { [weak self] error in
