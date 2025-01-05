@@ -54,7 +54,7 @@ final class DetailViewController: UIViewController {
     
     private let idLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.font = UIFont.boldSystemFont(ofSize: 30)
         label.textAlignment = .center
         label.textColor = .white
         label.text = "54"
@@ -63,7 +63,7 @@ final class DetailViewController: UIViewController {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.font = UIFont.boldSystemFont(ofSize: 30)
         label.textAlignment = .center
         label.textColor = .white
         label.text = "고라파덕"
@@ -72,6 +72,7 @@ final class DetailViewController: UIViewController {
     
     private let typeLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = .center
         label.textColor = .white
         label.text = "타입: 물"
@@ -80,6 +81,7 @@ final class DetailViewController: UIViewController {
     
     private let heightLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = .center
         label.textColor = .white
         label.text = "키: 0.8m"
@@ -88,6 +90,7 @@ final class DetailViewController: UIViewController {
     
     private let weightLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = .center
         label.textColor = .white
         label.text = "몸무게: 19.6kg"
