@@ -32,7 +32,7 @@ final class PokemonCell: UICollectionViewCell {
     
     private func setupUI() {
         contentView.addSubview(pokemonImageView)
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = .cellBackground
         contentView.layer.cornerRadius = 8
         
         pokemonImageView.snp.makeConstraints { make in

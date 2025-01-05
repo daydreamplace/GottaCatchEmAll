@@ -10,6 +10,7 @@ import Moya
 
 enum PokemonAPI {
     case fetchPokemonList(limit: Int, offset: Int)
+    case fetchPokemonDetail(id: Int)
 }
 
 extension PokemonAPI: TargetType {
@@ -19,23 +20,31 @@ extension PokemonAPI: TargetType {
     
     var path: String {
         switch self {
-        case .fetchPokemonList(let limit, let offset):
+        case .fetchPokemonList:
             return "/pokemon"
+        case .fetchPokemonDetail(let id):
+            return "/pokemon/\(id)"
         }
     }
     
     var method: Moya.Method {
-        return .get
+        switch self {
+        case .fetchPokemonList, .fetchPokemonDetail:
+            return .get
+        }
     }
     
     var task: Task {
-           switch self {
-           case .fetchPokemonList(let limit, let offset):
-               return .requestParameters(parameters: ["limit": limit, "offset": offset], encoding: URLEncoding.queryString)
-           }
-       }
+        switch self {
+        case .fetchPokemonList(let limit, let offset):
+            return .requestParameters(parameters: ["limit": limit, "offset": offset], encoding: URLEncoding.default)
+        case .fetchPokemonDetail:
+            return .requestPlain
+        }
+    }
     
     var headers: [String: String]? {
         return ["Content-Type": "application/json"]
     }
 }
+
