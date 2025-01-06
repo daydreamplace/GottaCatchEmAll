@@ -15,8 +15,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F20F0C7E2D2B116C0047CF1B /* GottaCatch'EmAll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GottaCatch'EmAll.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2889C232D241CE2008CAD5C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		F2B7BD852D2847CB001DE837 /* GottaCatch'EmAll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "GottaCatch'EmAll.app"; path = "/Users/eden/Desktop/iOS/GottaCatch'EmAll/build/Debug-iphoneos/GottaCatch'EmAll.app"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -60,6 +60,7 @@
 			children = (
 				F2889C232D241CE2008CAD5C /* .gitignore */,
 				F2B7BD332D2638D5001DE837 /* GottaCatch'EmAll */,
+				F20F0C7E2D2B116C0047CF1B /* GottaCatch'EmAll.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -89,7 +90,7 @@
 				F2B7BC5F2D262ACD001DE837 /* RxCocoa */,
 			);
 			productName = "GottaCatch'EmAll";
-			productReference = F2B7BD852D2847CB001DE837 /* GottaCatch'EmAll.app */;
+			productReference = F20F0C7E2D2B116C0047CF1B /* GottaCatch'EmAll.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
