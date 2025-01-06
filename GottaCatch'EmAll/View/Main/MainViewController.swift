@@ -11,6 +11,9 @@ import RxSwift
 
 final class MainViewController: UIViewController {
     
+    private let viewModel = MainViewModel()
+    private let disposeBag = DisposeBag()
+    
     private let pokemonBallImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "pokemonBall"))
         imageView.contentMode = .scaleAspectFit
@@ -22,22 +25,21 @@ final class MainViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(PokemonCell.self, forCellWithReuseIdentifier: "PokemonCell")
-        collectionView.delegate = self
-        collectionView.dataSource = self
+        collectionView.register(PokemonCell.self, forCellWithReuseIdentifier: PokemonCell.id)
         collectionView.backgroundColor = .darkRed
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .mainRed
+        pokemonCollectionView.delegate = self
         setupViews()
+        bindViewModel()
+        viewModel.fetchPokemonList()
     }
     
     func setupViews() {
+        view.backgroundColor = .mainRed
         view.addSubviews(pokemonBallImageView, pokemonCollectionView)
         
         pokemonBallImageView.snp.makeConstraints { make in
@@ -52,6 +54,22 @@ final class MainViewController: UIViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
         
+    }
+    
+    private func bindViewModel() {
+        viewModel.pokemonList
+            .observe(on: MainScheduler.instance)
+            .bind(to: pokemonCollectionView.rx.items(cellIdentifier: PokemonCell.id, cellType: PokemonCell.self)) { _, model, cell in
+                cell.configure(id: model.id)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.error
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { errorMessage in
+                print("Error: \(errorMessage)")
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -73,6 +91,16 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let selectedID = indexPath.row + 1
         let detailViewController = DetailViewController(pokemonID: selectedID)
         navigationController?.pushViewController(detailViewController, animated: true)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.height
+        
+        if offsetY > contentHeight - frameHeight * 2 {
+            viewModel.fetchPokemonList()
+        }
     }
 }
 
