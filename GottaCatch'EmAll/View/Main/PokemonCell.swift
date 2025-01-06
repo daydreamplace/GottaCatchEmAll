@@ -20,7 +20,8 @@ final class PokemonCell: UICollectionViewCell {
         return imageView
     }()
     
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
+    private var currentPokemonId: Int?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,6 +30,13 @@ final class PokemonCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        pokemonImageView.image = nil
+        disposeBag = DisposeBag()
+        currentPokemonId = nil
     }
     
     private func setupUI() {
@@ -43,13 +51,17 @@ final class PokemonCell: UICollectionViewCell {
     }
     
     func configure(id: Int) {
+        guard currentPokemonId != id else { return }
+        currentPokemonId = id
+        
         let networkManager = NetworkManager.shared
         networkManager.fetchImage(for: id)
             .observe(on: MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] image in
+                guard self?.currentPokemonId == id else { return }
                 self?.pokemonImageView.image = image
             }, onFailure: { error in
-                print(" \(id): \(error.localizedDescription)")
+                print("Failed to load Pokemon \(id): \(error.localizedDescription)")
             })
             .disposed(by: disposeBag)
     }
